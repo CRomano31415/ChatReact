@@ -15,14 +15,14 @@ import RoomList from './components/RoomList.js';
   };
   firebase.initializeApp(config);
 
+
 class App extends Component {
-	
   render() {
     return (
       <div className="App">
       	<ul>
-      	<RoomList />
-      	</ul>
+	      	<RoomList firebase={firebase}/>
+	    </ul>
       </div>
     );
   }
