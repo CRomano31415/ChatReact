@@ -11,7 +11,6 @@ class RoomList extends Component {
 		this.roomsRef = this.props.firebase.database().ref('rooms');
 	}
 
-
 	componentDidMount() {
 		this.roomsRef.on('child_added', snapshot => {
 			const room = snapshot.val();
@@ -26,7 +25,9 @@ class RoomList extends Component {
 		this.roomsRef.push({
 			name: this.state.newRooms
 		});
+		this.setState({ newRooms: '' });
 	}
+
 
 	handleChange(e) {
 	  	this.setState({ newRooms: e.target.value });
@@ -37,18 +38,19 @@ class RoomList extends Component {
 		return (
 			<div className="Rooms">
 				<div className="RoomList">
+				The active room through Room list is {  this.props.activeRoom }
 		    	 { 
 		    	 	this.state.rooms.map( (room, key) =>
-					<li key={ room.key } room={ room.name }>   
-						{ room.name }
-					</li>
+						<li key={ room.key } room={ room.name } onClick={(e) => this.props.setActiveRoom(room.name)}>   
+							{ room.name }
+						</li>
 				 )}
 				</div>
 				<div className="ChatRoom">
 					<form>
 					 Create new room
 					 Enter a room name
-					 <input type='text' onChange={ (e) => this.handleChange(e) } />
+					 <input type='text' value={ this.state.newRooms } onChange={ (e) => this.handleChange(e) } />
 					 <button type='submit' id='Cancel'>Cancel </button> 
 					 <button type='submit' value='Create room' onClick={(e) => this.createRoom(e)}>Create room </button> 
 					</form>
