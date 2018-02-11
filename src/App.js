@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import './App.css';
 import RoomList from './components/RoomList.js';
 import MessageList from './components/MessageList.js';
+import './styles/App.css';
+
 
  // Initialize Firebase
   var config = {
@@ -35,7 +37,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      	The active room through App is { this.state.activeRoom }
       	<ul>
 	      	<RoomList firebase={ firebase } activeRoom={ this.state.activeRoom } setActiveRoom={ (e) => this.setActiveRoom(e) } />
 	      	<MessageList firebase={ firebase } activeRoom={ this.state.activeRoom }/>

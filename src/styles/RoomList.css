@@ -1,0 +1,30 @@
+.Rooms {
+	flex: 1 1 auto;
+	width: 20%;
+	margin-left: 0%;
+	align-self: flex-start;
+	background-color: #716172;
+	font-family: Calibri;
+}
+.RoomList {
+	font-size: 1.5em; 
+	padding-left: 1em;
+}
+li:hover {
+	color: #cac0d3;
+}
+.NewRoomForm {
+	background-color: #716172;
+	padding: none;
+	margin: none;
+	width: 100%;
+	height: 100%;
+/*	visibility: hidden;
+*/}
+.Title {
+	font-size: 2em;
+	font-weight: bold;
+}
+.RoomTxt {
+	width: 80%;
+}

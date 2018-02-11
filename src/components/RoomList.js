@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import '../styles/RoomList.css';
+
 
 class RoomList extends Component {
 //to add a state you need the constructors
@@ -28,6 +30,10 @@ class RoomList extends Component {
 		this.setState({ newRooms: '' });
 	}
 
+	ShowCreate(e) {
+		//does nothing right now, eventually toggle?
+
+	}
 
 	handleChange(e) {
 	  	this.setState({ newRooms: e.target.value });
@@ -37,8 +43,11 @@ class RoomList extends Component {
 	render() {
 		return (
 			<div className="Rooms">
+				<div className="Title">
+				Channels
+					<button type='submit' id='CreateNew' onClick={(e) => this.ShowCreate(e)}>New Room</button>
+				</div>
 				<div className="RoomList">
-				The active room through Room list is {  this.props.activeRoom }
 		    	 { 
 		    	 	this.state.rooms.map( (room, key) =>
 						<li key={ room.key } room={ room.name } onClick={(e) => this.props.setActiveRoom(room.name)}>   
@@ -47,10 +56,10 @@ class RoomList extends Component {
 				 )}
 				</div>
 				<div className="ChatRoom">
-					<form>
+					<form className="NewRoomForm">
 					 Create new room
 					 Enter a room name
-					 <input type='text' value={ this.state.newRooms } onChange={ (e) => this.handleChange(e) } />
+					 <input className='RoomTxt' type='text' value={ this.state.newRooms } onChange={ (e) => this.handleChange(e) } />
 					 <button type='submit' id='Cancel'>Cancel </button> 
 					 <button type='submit' value='Create room' onClick={(e) => this.createRoom(e)}>Create room </button> 
 					</form>

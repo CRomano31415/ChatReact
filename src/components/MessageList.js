@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import '../styles/MessageList.css';
+
 
 class MessageList extends Component {
 //to add a state you need the constructors
@@ -48,23 +50,19 @@ class MessageList extends Component {
 	render() {
 		return (
 			<div className="Messages">
-				<div className="ActiveRoom">
-					<span>This is the active Room through Message List { this.props.activeRoom }</span>
-				</div>
 				<div className="ChatMessages">
 		    	 { 
 			    	 this.displayMessages().map( (msg) =>
 						<li key={ msg.key } roomid={ msg.roomId } sentat={ msg.sentAt } username={ msg.username } >   
-							{ msg.content }
+							{msg.username}: { msg.content }
 						</li>
 				 	)
 				}
 
 				</div>
 				<div className="MsgForm">
-					<form>
-					Start of the Messages
-					 <input type='text' value={this.state.newMessages} onChange={ (e) => this.handleChange(e) } />
+					<form className="NewMsgForm">
+					 <input className='MsgText' type='text' value={this.state.newMessages} onChange={ (e) => this.handleChange(e) } />
 					 <button type='submit' value='Enter' onClick={(e) => this.enterMessage(e)}>Enter </button> 
 					 </form>
 				</div>

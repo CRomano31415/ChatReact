@@ -1,0 +1,19 @@
+.App {
+}
+ul {
+	display: flex;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+button {
+	border-radius: 7%;
+	padding: 0.5em;
+	box-shadow: none;
+	border: 1px solid black;
+	background-color: #cac0d3;
+}
+button:hover {
+	background-color: #8d8693;
+	color: white;
+}
