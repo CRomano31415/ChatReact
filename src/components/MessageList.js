@@ -37,7 +37,7 @@ class MessageList extends Component {
 			content: this.state.newMessages,
 			roomId: this.props.activeRoom,
 			sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
-			username: "Claudia"
+			username: this.props.activeUser
 		});
 		this.setState({ newMessages: ''});
 	}
@@ -50,22 +50,25 @@ class MessageList extends Component {
 	render() {
 		return (
 			<div className="Messages">
-				<div className="ChatMessages">
-		    	 { 
-			    	 this.displayMessages().map( (msg) =>
-						<li key={ msg.key } roomid={ msg.roomId } sentat={ msg.sentAt } username={ msg.username } >   
-							{msg.username}: { msg.content }
-						</li>
-				 	)
+				{ this.props.activeRoom &&
+					<div className="ChatMessages">
+			    	 { 
+				    	 this.displayMessages().map( (msg) =>
+							<li key={ msg.key } roomid={ msg.roomId } sentat={ msg.sentAt } username={ msg.username } >   
+								{msg.username}: { msg.content }
+							</li>
+					 	)
+					 }
+					</div>
+				}{ this.props.activeRoom &&
+					<div className="MsgForm">
+						<form className="NewMsgForm">
+						 {this.props.activeUser + " : "}
+						 <input className='MsgText' type='text' value={this.state.newMessages} onChange={ (e) => this.handleChange(e) } />
+						 <button type='submit' value='Enter' onClick={(e) => this.enterMessage(e)}>Enter </button> 
+						 </form>
+					</div>
 				}
-
-				</div>
-				<div className="MsgForm">
-					<form className="NewMsgForm">
-					 <input className='MsgText' type='text' value={this.state.newMessages} onChange={ (e) => this.handleChange(e) } />
-					 <button type='submit' value='Enter' onClick={(e) => this.enterMessage(e)}>Enter </button> 
-					 </form>
-				</div>
 			</div>
 		)
 	}

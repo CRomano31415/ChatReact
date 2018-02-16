@@ -8,7 +8,8 @@ class RoomList extends Component {
 		super(props);
 		this.state = {
 			rooms: [],
-			newRooms: ''
+			newRooms: '',
+			createNewRoom: false
 		}
 		this.roomsRef = this.props.firebase.database().ref('rooms');
 	}
@@ -28,11 +29,17 @@ class RoomList extends Component {
 			name: this.state.newRooms
 		});
 		this.setState({ newRooms: '' });
+		this.setState({ createNewRoom: false});
+	}
+
+	cancelRoom(e){
+		e.preventDefault();
+		this.setState({ createNewRoom: false});
 	}
 
 	ShowCreate(e) {
 		//does nothing right now, eventually toggle?
-
+		this.setState({createNewRoom: true});
 	}
 
 	handleChange(e) {
@@ -55,15 +62,17 @@ class RoomList extends Component {
 						</li>
 				 )}
 				</div>
+				{ this.state.createNewRoom &&
 				<div className="ChatRoom">
 					<form className="NewRoomForm">
 					 Create new room
 					 Enter a room name
 					 <input className='RoomTxt' type='text' value={ this.state.newRooms } onChange={ (e) => this.handleChange(e) } />
-					 <button type='submit' id='Cancel'>Cancel </button> 
+					 <button type='submit' id='Cancel' onClick={(e) => this.cancelRoom(e)}>Cancel </button> 
 					 <button type='submit' value='Create room' onClick={(e) => this.createRoom(e)}>Create room </button> 
 					</form>
 				</div>
+				}
 			</div>
 		)
 	}
