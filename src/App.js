@@ -31,7 +31,6 @@ class App extends Component {
 		}
 
 		setActiveRoom(roomname) {
-	  	//highlight active room and modify state in App js
 	  	this.setState({ activeRoom: roomname });
 
 		}
@@ -44,15 +43,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      		<User firebase={ firebase } activeUser={ this.state.activeUser} setActiveUser={ (e) => this.setActiveUser(e) } />
-			<ul>
+	    <User firebase={ firebase } activeUser={ this.state.activeUser} setActiveUser={ (e) => this.setActiveUser(e) } />
+      	<div className="AppContainer">
 	      		{ this.state.activeUser &&
 			    	<RoomList firebase={ firebase } activeRoom={ this.state.activeRoom } setActiveRoom={ (e) => this.setActiveRoom(e) } />
 			    }
 			    { this.state.activeUser &&
 			    	<MessageList firebase={ firebase } activeRoom={ this.state.activeRoom } activeUser={ this.state.activeUser } />
 				}
-		    </ul>
+		</div>
 	  </div>
     );
   }

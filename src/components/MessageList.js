@@ -52,6 +52,7 @@ class MessageList extends Component {
 			<div className="Messages">
 				{ this.props.activeRoom &&
 					<div className="ChatMessages">
+					<ul>
 			    	 { 
 				    	 this.displayMessages().map( (msg) =>
 							<li key={ msg.key } roomid={ msg.roomId } sentat={ msg.sentAt } username={ msg.username } >   
@@ -59,6 +60,7 @@ class MessageList extends Component {
 							</li>
 					 	)
 					 }
+					 </ul>
 					</div>
 				}{ this.props.activeRoom &&
 					<div className="MsgForm">

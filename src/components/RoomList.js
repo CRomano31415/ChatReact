@@ -38,7 +38,6 @@ class RoomList extends Component {
 	}
 
 	ShowCreate(e) {
-		//does nothing right now, eventually toggle?
 		this.setState({createNewRoom: true});
 	}
 
@@ -52,16 +51,8 @@ class RoomList extends Component {
 			<div className="Rooms">
 				<div className="Title">
 				Channels
-					<button type='submit' id='CreateNew' onClick={(e) => this.ShowCreate(e)}>New Room</button>
 				</div>
-				<div className="RoomList">
-		    	 { 
-		    	 	this.state.rooms.map( (room, key) =>
-						<li key={ room.key } room={ room.name } onClick={(e) => this.props.setActiveRoom(room.name)}>   
-							{ room.name }
-						</li>
-				 )}
-				</div>
+				<button type='submit' id='CreateNew' onClick={(e) => this.ShowCreate(e)}>New Room</button>
 				{ this.state.createNewRoom &&
 				<div className="ChatRoom">
 					<form className="NewRoomForm">
@@ -73,6 +64,16 @@ class RoomList extends Component {
 					</form>
 				</div>
 				}
+				<div className="RoomList">
+				<ul>
+		    	 { 
+		    	 	this.state.rooms.map( (room, key) =>
+						<li key={ room.key } room={ room.name } onClick={(e) => this.props.setActiveRoom(room.name)}>   
+							{ room.name }
+						</li>
+				 )}
+				 </ul>
+				</div>
 			</div>
 		)
 	}

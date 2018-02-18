@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
+import '../styles/User.css';
 
 class User extends Component {
 
 	componentDidMount() {
 		this.props.firebase.auth().onAuthStateChanged( user => {
-			this.props.setActiveUser(user.displayName);
+
+			(user != null) ?  this.props.setActiveUser(user.displayName) : this.props.setActiveUser(null);
+
 		});
 	}
 
 	signIn(e) {
 	  	e.preventDefault();
+
 	 	const provider = new this.props.firebase.auth.GoogleAuthProvider();
 	  	this.props.firebase.auth().signInWithPopup( provider );
 	}
@@ -23,7 +27,6 @@ class User extends Component {
 render(){
 	return (
 		<div className='UserName'>
-			<h3>Set a username</h3>
 			<button type='submit' onClick={(e) => this.signIn(e)}>Sign In</button>
 			<button type='submit' onClick={(e) => this.signOut(e)}>Sign Out</button>
 		</div>

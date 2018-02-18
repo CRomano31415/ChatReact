@@ -1,11 +1,11 @@
-.App {
+.AppContainer {
 	display: flex;
-}
-ul {
-	display: inline-flex;
-	list-style-type: none;
-	padding: 0;
-	margin: 0;
+	flex-flow: row nowrap;
+	justify-content: center;
+	align-items: stretch;
+	flex-grow: 0;
+	font-family: 'Roboto Condensed', sans-serif;
+	border: 3px solid black;
 }
 button {
 	border-radius: 7%;
