@@ -39,17 +39,15 @@ class RoomList extends Component {
 	deleteRoom(e) {
 	  	e.preventDefault();
 	  	let activeRoomKey;
-
 	  	//this will get me the active room's key
 	  	this.state.rooms.forEach((element)=>{
-	  	(element.name === this.props.activeRoom) ? activeRoomKey = element.key : activeRoomKey = '';
-		});
-
+		  	if(element.name === this.props.activeRoom){
+	  			activeRoomKey = element.key;
+	  			return;
+		  	}
+	  	});
 	  	//using the key, remove the item from db
-		this.roomsRef.child(this.props.activeRoom).remove(()=>{
-			console.log("it deleted it");
-		}); 
-
+		this.roomsRef.child(activeRoomKey).remove(); 
 		this.setState({ newRooms: '' });
 		(this.state.rooms.length > 0) ? this.setState({ createNewRoom: false}) : this.setState({ createNewRoom: true});
 	}
