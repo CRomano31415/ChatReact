@@ -15,10 +15,9 @@ class RoomList extends Component {
 	}
 
 	componentDidMount() {
-		this.roomsRef.on('child_added', snapshot => {
+			this.roomsRef.on('child_added', snapshot => {
 			const room = snapshot.val();
 			room.key = snapshot.key;
-
 			this.setState({ rooms: this.state.rooms.concat( room ) });
 		});
 	}
@@ -35,6 +34,24 @@ class RoomList extends Component {
 	cancelRoom(e){
 		e.preventDefault();
 		this.setState({ createNewRoom: false});
+	}
+
+	deleteRoom(e) {
+	  	e.preventDefault();
+	  	let activeRoomKey;
+
+	  	//this will get me the active room's key
+	  	this.state.rooms.forEach((element)=>{
+	  	(element.name === this.props.activeRoom) ? activeRoomKey = element.key : activeRoomKey = '';
+		});
+
+	  	//using the key, remove the item from db
+		this.roomsRef.child(this.props.activeRoom).remove(()=>{
+			console.log("it deleted it");
+		}); 
+
+		this.setState({ newRooms: '' });
+		(this.state.rooms.length > 0) ? this.setState({ createNewRoom: false}) : this.setState({ createNewRoom: true});
 	}
 
 	ShowCreate(e) {
@@ -71,7 +88,8 @@ class RoomList extends Component {
 						<li key={ room.key } room={ room.name } onClick={(e) => this.props.setActiveRoom(room.name)}>   
 							{ room.name }
 						</li>
-				 )}
+				 	)}
+			 	<button type='submit' id='Delete' onClick={(e) => this.deleteRoom(e)}>Delete a Room</button>
 				 </ul>
 				</div>
 			</div>

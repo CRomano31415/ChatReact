@@ -70,7 +70,7 @@ class MessageList extends Component {
 						 <button type='submit' value='Enter' onClick={(e) => this.enterMessage(e)}>Enter </button> 
 						 </form>
 					</div>
-				}
+				} { this.props.activeRoom === null && "Select a room to view messages"}
 			</div>
 		)
 	}
