@@ -27,8 +27,9 @@ class User extends Component {
 render(){
 	return (
 		<div className='UserName'>
-			<button type='submit' onClick={(e) => this.signIn(e)}>Sign In</button>
-			<button type='submit' onClick={(e) => this.signOut(e)}>Sign Out</button>
+			<div className="User">{ this.props.activeUser }</div>
+			{ !this.props.activeUser && <button type='submit' onClick={(e) => this.signIn(e)}>Sign In</button> }		
+			{ this.props.activeUser && <button type='submit' onClick={(e) => this.signOut(e)}>Sign Out</button>}
 		</div>
 		)
 	}
